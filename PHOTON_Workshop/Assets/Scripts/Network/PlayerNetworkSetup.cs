@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerNetworkSetup : MonoBehaviour
 {
-    public TextMeshProUGUI textConnect;
+    
     private NetworkManager _networkManager;
     public PlayerController PlayerController;
     public GameObject PlayerCamera;
@@ -14,6 +14,9 @@ public class PlayerNetworkSetup : MonoBehaviour
     public GameObject HubInterface;
     public GameObject InGameInterface;
     public TextMeshProUGUI roomNameTxt;
+    public TextMeshProUGUI healthInfoText;
+    public TextMeshProUGUI textConnect;
+    public GameObject WorldInfoInterface;
     
     private void Awake()
     {
@@ -22,7 +25,7 @@ public class PlayerNetworkSetup : MonoBehaviour
         _networkManager = FindObjectOfType<NetworkManager>();
     }
 
-    public void InitPlayer()
+    public void InitPlayer() //Initialize les informations joueurs et sépare bien les clients. Appelé à l'instantiation du client.
     {
         if (GetComponent<PhotonView>().IsMine)
         {
@@ -30,6 +33,7 @@ public class PlayerNetworkSetup : MonoBehaviour
             PlayerController.enabled = true;
             HubInterface.SetActive(true);
             InGameInterface.SetActive(true);
+            //WorldInfoInterface.SetActive(true);
         }
         else
         {
@@ -37,10 +41,11 @@ public class PlayerNetworkSetup : MonoBehaviour
             PlayerController.enabled = false;
             HubInterface.SetActive(false);
             InGameInterface.SetActive(false);
+            //WorldInfoInterface.SetActive(false);
         }
     }
     
-    public void JoinQueue()
+    public void JoinQueue() //Utilisation d'une fonction local qui appelle une fonction RPC pour effectuer la connection réseau.
     {
         _networkManager.JoinQueue();
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class MatchmakingManager : MonoBehaviour
+public class MatchmakingManager : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 {
         private PhotonView localPlayer;
         private LoadBalancingClient _loadBalancingClient;
