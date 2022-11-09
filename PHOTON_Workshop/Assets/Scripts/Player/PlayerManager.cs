@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable, IDamagea
         else
         {
             //dans ce cas là on est en IsReading et on recoit les informations. Si on est pas propriétaire du View.
-            this.currentHealth = (int) stream.ReceiveNext();
+            currentHealth = (int) stream.ReceiveNext();
             playerNS.healthInfoText.text = (string) stream.ReceiveNext();
         }
     }
@@ -36,11 +36,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable, IDamagea
         
         currentHealth -= amount;
         
-        Debug.LogError(this.gameObject.name + " health is " + currentHealth);
+        Debug.LogError(gameObject.name + " health is " + currentHealth);
         
         if (currentHealth <= 0)
         {
-            Debug.LogError(this.gameObject.name + " health is " + currentHealth);
+            Debug.LogError(gameObject.name + " health is " + currentHealth);
         }
     }
 
